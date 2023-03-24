@@ -5,4 +5,3 @@ metadata:
 data:
   config.txt: |
     number=1
-    message=Hello, world!
