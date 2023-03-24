@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: increment-number-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: increment-number-container
+        image: alpine
+        command: [ "/bin/sh", "-c", "sh /path/to/script.sh" ]
+        env:
+        - name: GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: github-token-secret
+              key: token
+      restartPolicy: Never
+      initContainers:
+      - name: wait-for-deployment
+        image: alpine
+        command: [ "/bin/sh", "-c", "until wget -qO- http://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/healthz; do sleep 1; done" ]
+      terminationGracePeriodSeconds: 0
+  backoffLimit: 0
