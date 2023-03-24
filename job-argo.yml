@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: argocd-sync-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: argocd-api-container
+        image: curlimages/curl
+        command: ['curl', '-X', 'POST', '-H', 'Authorization: Bearer $ARGOCD_TOKEN', '-k', 'https://argocd-server/api/v1/applications/my-app/actions/sync']
+        env:
+        - name: ARGOCD_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: argocd-secret
+              key: token
+      restartPolicy: Never
+  backoffLimit: 0
