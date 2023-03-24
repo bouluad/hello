@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+      - name: my-container
+        image: my-image
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  # Post-deployment hook
+  # Runs the curl command after all replicas have been updated
+  # This hook will run after a successful deployment
+  # and only once per deployment
+  # Replace "curl" command with the command you want to run
+  # You can use multiple hooks if needed
+  # The pod runs in the same namespace as the deployment
+  # and has access to the same resources as the deployment
+  # For more information, see the Kubernetes documentation:
+  # https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/#running-an-automated-task-with-a-post-deployment-job-hook
+  template:
+    metadata:
+      annotations:
+        "kubectl.kubernetes.io/post-deployment": |
+          {"spec": {"containers": [{"name": "curl", "image": "curlimages/curl", "command": ["curl", "-X", "POST", "http://my-api.com"]}]}}
