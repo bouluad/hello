@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+      - name: my-container
+        image: my-image
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  # Post-deployment hook
+  template:
+    metadata:
+      annotations:
+        "kubectl.kubernetes.io/post-deployment": |
+          {"spec": {"containers": [{"name": "argocd", "image": "argoproj/argocd-cli", "command": ["argocd", "app", "sync", "my-app", "--prune", "--wait"]}]}}
