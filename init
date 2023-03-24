@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: main-container
+    image: my-image
+  initContainers:
+  - name: api-call-container
+    image: curlimages/curl
+    command: ['curl', '-X', 'POST', 'http://my-api.com']
