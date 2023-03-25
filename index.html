@@ -13,7 +13,7 @@
 	<script>
 		async function updateDeployments() {
 		  const xhr = new XMLHttpRequest();
-		  xhr.open('GET', '/usr/share/nginx/html/app/conf.txt');
+		  xhr.open('GET', 'file:///usr/share/nginx/html/app/conf.txt');
 		  xhr.onload = () => {
 		    if (xhr.status === 200) {
 		      const deployments = xhr.responseText;
