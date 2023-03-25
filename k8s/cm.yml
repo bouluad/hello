@@ -4,4 +4,4 @@ metadata:
   name: my-configmap
 data:
   config.txt: |
-    99
+    30
