@@ -11,19 +11,19 @@
 	<p>Seconds since page load: <span id="seconds"></span></p>
 
 	<script>
-async function updateDeployments() {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', './app/conf.txt');
-  xhr.onload = () => {
-    if (xhr.status === 200) {
-      const deployments = xhr.responseText;
-      document.getElementById("deployments").innerHTML = deployments;
-    } else {
-      console.warn("Failed to load conf.txt");
-    }
-  };
-  xhr.send();
-}
+		async function updateDeployments() {
+		  const xhr = new XMLHttpRequest();
+		  xhr.open('GET', '/usr/share/nginx/html/app/conf.txt');
+		  xhr.onload = () => {
+		    if (xhr.status === 200) {
+		      const deployments = xhr.responseText;
+		      document.getElementById("deployments").innerHTML = deployments;
+		    } else {
+		      console.warn("Failed to load conf.txt");
+		    }
+		  };
+		  xhr.send();
+		}
 
 		function updateSeconds() {
 			// Get the current timestamp in seconds
