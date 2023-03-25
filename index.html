@@ -15,7 +15,7 @@
 			// Replace this with your own logic to get the number of deployments for the day
 			//var deployments = 1;
 
-			deployments = await (await fetch('/usr/share/nginx/html/app/conf.txt')).text();
+			deployments = await (await fetch('./app/conf.txt')).text();
 
 			if (deployments) {
 				document.getElementById("deployments").innerHTML = deployments;
