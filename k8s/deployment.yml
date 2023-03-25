@@ -24,7 +24,7 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: my-configmap1
+          name: my-configmap
           items:
           - key: config.txt
             path: conf.txt
