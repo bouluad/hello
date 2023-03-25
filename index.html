@@ -12,17 +12,19 @@
 
 	<script>
 		async function updateDeployments() {
-		  const xhr = new XMLHttpRequest();
-		  xhr.open('GET', '/usr/share/nginx/html/app/conf.txt');
-		  xhr.onload = () => {
-		    if (xhr.status === 200) {
-		      const deployments = xhr.responseText;
-		      document.getElementById("deployments").innerHTML = deployments;
-		    } else {
-		      console.warn("Failed to load conf.txt");
-		    }
-		  };
-		  xhr.send();
+			// Replace this with your own logic to get the number of deployments for the day
+			//var deployments = 1;
+
+			deployments = await (await fetch('/usr/share/nginx/html/app/conf.txt')).text();
+
+			if (deployments) {
+				document.getElementById("deployments").innerHTML = deployments;
+			} else {
+				console.warn("DEPLOYMENTS environment variable not set");
+			}
+
+			// Update the text of the span element with id "deployments"
+			// document.getElementById("deployments").innerHTML = deployments;
 		}
 
 		function updateSeconds() {
