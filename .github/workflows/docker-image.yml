@@ -19,4 +19,4 @@ jobs:
           docker build -t mobouluad/hello:lts .
       - name: Push Docker image
         run: |
-          docker push mobouluad/hello:${{ github.sha }}
+          docker push mobouluad/hello:lts
