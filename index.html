@@ -8,6 +8,8 @@
 <body>
 	<h1>Hello World</h1>
 	<p>Number of deployments for today: <span id="deployments"></span></p>
+	<p>Counter: <span id="counter">0</span></p>
+
 	<p>Seconds since page load: <span id="seconds"></span></p>
 
 	<script>
@@ -38,6 +40,11 @@
 			document.getElementById("seconds").innerHTML = formattedDate;
 		}
 
+		      var counter = 0;
+      setInterval(function() {
+        counter++;
+        document.getElementById("counter").innerHTML = counter;
+      }, 5000);
 		// Call the updateDeployments and updateSeconds functions initially
 		updateDeployments();
 		updateSeconds();
