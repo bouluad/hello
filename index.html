@@ -15,7 +15,7 @@
 			// Replace this with your own logic to get the number of deployments for the day
 			//var deployments = 1;
 
-			deployments = await (await fetch('./conf.txt')).text();
+			deployments = await (await fetch('/root/app/conf.txt')).text();
 
 			if (deployments) {
 				document.getElementById("deployments").innerHTML = deployments;
