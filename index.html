@@ -11,21 +11,19 @@
 	<p>Seconds since page load: <span id="seconds"></span></p>
 
 	<script>
-		async function updateDeployments() {
-			// Replace this with your own logic to get the number of deployments for the day
-			//var deployments = 1;
-
-			deployments = await (await fetch('./app/conf.txt')).text();
-
-			if (deployments) {
-				document.getElementById("deployments").innerHTML = deployments;
-			} else {
-				console.warn("DEPLOYMENTS environment variable not set");
-			}
-
-			// Update the text of the span element with id "deployments"
-			// document.getElementById("deployments").innerHTML = deployments;
-		}
+async function updateDeployments() {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', '/path/to/conf.txt');
+  xhr.onload = () => {
+    if (xhr.status === 200) {
+      const deployments = xhr.responseText;
+      document.getElementById("deployments").innerHTML = deployments;
+    } else {
+      console.warn("Failed to load conf.txt");
+    }
+  };
+  xhr.send();
+}
 
 		function updateSeconds() {
 			// Get the current timestamp in seconds
