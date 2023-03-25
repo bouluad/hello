@@ -4,4 +4,4 @@ metadata:
   name: my-configmap1
 data:
   config.txt: |
-    12
+    11
