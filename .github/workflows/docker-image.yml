@@ -16,7 +16,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Build Docker image
         run: |
-          docker build -t mobouluad/hello:${{ github.sha }} .
+          docker build -t mobouluad/hello:lts .
       - name: Push Docker image
         run: |
           docker push mobouluad/hello:${{ github.sha }}
